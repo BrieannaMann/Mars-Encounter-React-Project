@@ -42,10 +42,12 @@ handleChange(event) {
 }
 
 handleSubmit(event) {
-
+  event.preventDefault();
   axios.post("https://red-wdp-api.herokuapp.com/api/mars/colonists", {
-"colonist":{"name":this.state.name,"age": this.state.age,  "job_id" : this.state.job}
-
+"colonist":
+  {"name":this.state.name,
+  "age": this.state.age,
+  "job_id" : this.state.job}
 })
   .then(function(response) {
     console.log(response);
@@ -66,20 +68,29 @@ componentDidMount(){
      console.log(error);
    })
 }
-  render() {
-    return (
-          <form onSubmit={this.handleSubmit}>
-                <input type="text" name="name" placeholder="Name"  onChange={ (event) => this.handleChange(event)} />
-                <input type="number" name="age" placeholder="Age" value={this.state.age} onChange={(event) => this.handleChange(event)} />
-                <select name="job" value={this.state.job} onChange={(event) => this.handleChange(event)} >
-                  <option value="no" >Select your Occupation</option>
-                  {this.state.jobs.map(job =>
-                    <option value={job.id} >{job.name}  </option>
-                )}
-                </select>
-                <Link to='/GetEncounters'>
-                <input type="submit" value="Check in" /></Link>
-          </form>
+render() {
+return (
+<form onSubmit={this.handleSubmit}>
+<div>
+<img className="mars" src="assets/check-in-page.png" />
+</div>
+  <h1> CHECK IN AT BASE CAMP </h1>
+  <h3> NAME </h3>
+    <input type="text" name="name" placeholder="Name"  onChange={ (event) => this.handleChange(event)} />
+  <h3> AGE </h3>
+    <input type="number" name="age" placeholder="Age" value={this.state.age} onChange={(event) => this.handleChange(event)} />
+  <h3> OCCUPATION </h3>
+    <select name="job" value={this.state.job} onChange={(event) => this.handleChange(event)} >
+      <option value="no" >Select your Occupation</option>
+        {this.state.jobs.map(job =>
+        <option value={job.id} >{job.name}  </option>)}
+    </select>
+    <div className="checkin">
+      <Link to='/GetEncounters'>
+        <input type="submit" value="Check in" />
+      </Link>
+    </div>
+</form>
 
     );
   }
@@ -90,16 +101,18 @@ componentDidMount(){
 class ReportEncounter extends Component {
 constructor(props) {
  super(props);
- this.state={aliens:[],
+ this.state={
+   aliens:[],
    action: ""};
-
+   this.handleChange = this.handleChange.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
 }
 handleChange(event) {
 this.setState({[event.target.name] : event.target.value});
 }
 
 handleSubmit(event) {
-  event.preventDefault();
+
   axios.post("https://red-wdp-api.herokuapp.com/api/mars/encounters", {
 "encounter":{
   "atype":this.state.alien,
@@ -127,22 +140,28 @@ componentDidMount(){
  });
 }
 render() {
-  return (
-    <form>
-    <Link to='/GetEncounters'>
-    <input type="submit" value="ENCOUNTERS" />
-    </Link>
-      <select name="alien" value={this.state.alien} onChange={this.handleChange} >
-        <option value="no" >Select Alien</option>
-        {this.state.aliens.map(alien =>
+return (
+  <div>
+    <h1>REPORT</h1>
+  <form>
+    <h3>ALIEN TYPE</h3>
+    <select name="alien" value={this.state.alien} onChange={this.handleChange} >
+    <option value="no" >Select Alien</option>
+      {this.state.aliens.map(alien =>
         <option key={alien.id} > {alien.type} </option> )}
-        </select>
-        <input type="text" name="action" placeholder="Action Taken" value={this.state.action} onChange={this.handleChange} />
-          <input type="submit" value="Submit Report"  onClick={this.handleSubmit}/>
-      </form>
+    </select>
+    <h3>ACTION TAKEN</h3>
+      <input type="text" name="action" placeholder="Action Taken" value={this.state.action} onChange={this.handleChange} />
+    <div className="report">
+
+    <Link to='/GetEncounters'>
+      <input type="submit" value="SUBMIT REPORT"  onClick={this.handleSubmit}/>
+    </Link>
+    </div>
+  </form>
+  </div>
   );
-}
-}
+}}
 
 
 
@@ -162,23 +181,30 @@ class GetEncounters extends Component {
        console.log(error);
    });
  }
-  render() {
-    return (
-      <div>
-        <form>
-        <div className="report-button">
-        <Link to='/ReportEncounter'>
-        <input type="submit" value=" Report Encounter" /></Link>
-        </div>
-        <div className="encounter-list">
-        {this.state.encounters.map(encounter =>
-          <p key={encounter.id} >{encounter.date} {encounter.atype}
-          {encounter.action} </p>
-        )}
-        </div>
+render() {
+return (
+  <div>
+    <h1> RECENT ALIEN ENCOUNTERS</h1>
 
-        </form>
-      </div>
+  <form>
+  <h3>SEEN AN ALIEN</h3>
+    <div className="report-button">
+    <Link to='/ReportEncounter'>
+        <input type="submit" value=" Report Encounter" /></Link>
+    </div>
+    <h3>RECENT SIGHTINGS </h3>
+    <div>
+    </div>
+    <div>
+    </div>
+    <div>
+    </div>
+    <div className="encounter-list">
+      {this.state.encounters.map(encounter =>
+      <p key={encounter.id} >{encounter.date} {encounter.atype}{encounter.action} </p>)}
+    </div>
+    </form>
+    </div>
     );
   }
 }
