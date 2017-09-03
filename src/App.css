@@ -5,7 +5,9 @@ h3{
   font-family: 'Space Mono', monospace;
 }
 .mars{
-  width:10%;
   position: absolute;
   right:0;
+}
+.errormessage{
+  width:50%;
 }

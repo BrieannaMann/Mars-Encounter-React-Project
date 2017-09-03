@@ -17,9 +17,11 @@ class App extends Component{
    return (
      <Router>
      <div>
-        <Route exact path='/' component={CheckIn} />
+        <Route exact path='/CheckIn' component={CheckIn} />
         <Route path='/ReportEncounter' component={ReportEncounter} />
         <Route path='/GetEncounters' component={GetEncounters} />
+
+      <Route path='*' exact={true} component={lost} />
      </div>
      </Router>
    );
@@ -72,7 +74,7 @@ render() {
 return (
 <form onSubmit={this.handleSubmit}>
 <div>
-<img className="mars" src="assets/check-in-page.png" />
+<img className="mars" src="assets/stars.gif" />
 </div>
   <h1> CHECK IN AT BASE CAMP </h1>
   <h3> NAME </h3>
@@ -208,7 +210,28 @@ return (
     );
   }
 }
+class lost extends Component{
+  constructor(props) {
+   super(props);
+ }
+ render() {
+   return (
 
+     <div>
+     <h3> LOOKS LIKE YOUR LOST IN </h3>
+     <h1>SPACE </h1>
+     <img className="errormessage" src="assets/404.png" />
+     <Link to='/CheckIn'>
+         <button value=" Report Encounter">
+         </button>
+         </Link>
+     </div>
+
+   );
+
+
+}
+}
 
 
 
