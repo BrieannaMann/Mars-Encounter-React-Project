@@ -21,7 +21,6 @@ class App extends Component{
         <Route path='/ReportEncounter' component={ReportEncounter} />
         <Route path='/GetEncounters' component={GetEncounters} />
 
-      <Route path='*' exact={true} component={lost} />
      </div>
      </Router>
    );
@@ -72,27 +71,27 @@ componentDidMount(){
 }
 render() {
 return (
-<form onSubmit={this.handleSubmit}>
 <div>
-<img className="mars" src="assets/stars.gif" />
-</div>
-  <h1> CHECK IN AT BASE CAMP </h1>
+  <img className="mars" src="assets/stars.gif"/>
+  <h1 className="flex width-50 vertical-direction align-center"> CHECK IN AT BASE CAMP </h1>
+  <form className="padding-lg" onSubmit={this.handleSubmit}>
   <h3> NAME </h3>
-    <input type="text" name="name" placeholder="Name"  onChange={ (event) => this.handleChange(event)} />
+    <input type="text" name="name"  onChange={ (event) => this.handleChange(event)} />
   <h3> AGE </h3>
-    <input type="number" name="age" placeholder="Age" value={this.state.age} onChange={(event) => this.handleChange(event)} />
+    <input type="number" name="age" value={this.state.age} onChange={(event) => this.handleChange(event)} />
   <h3> OCCUPATION </h3>
     <select name="job" value={this.state.job} onChange={(event) => this.handleChange(event)} >
       <option value="no" >Select your Occupation</option>
         {this.state.jobs.map(job =>
         <option value={job.id} >{job.name}  </option>)}
     </select>
-    <div className="checkin">
+    </form>
+    <div className="width-50 flex flex-end">
       <Link to='/GetEncounters'>
         <input type="submit" value="Check in" />
       </Link>
+      </div>
     </div>
-</form>
 
     );
   }

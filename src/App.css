@@ -3,11 +3,38 @@ h1{
 }
 h3{
   font-family: 'Space Mono', monospace;
+  font-size: 25px;
 }
 .mars{
-  position: absolute;
-  right:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+  right:0px;
 }
+
 .errormessage{
   width:50%;
+}
+input[type=text],[type=number]  {
+  border: none;
+  border-bottom: 2px solid blue;
+  width:25%;
+}
+.flex{
+  display:flex;
+  }
+.width-50 {
+  width:50%;
+}
+.vertical-direction {
+  flex-direction: column;
+}
+.align-center{
+  align-items: center;
+}
+.padding-lg{
+  padding:5em;
+}
+.flex-end{
+  justify-content: flex-end;
 }
