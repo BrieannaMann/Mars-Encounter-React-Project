@@ -58,6 +58,9 @@ h3{
 p{
   padding:.5em;
 }
+.white{
+  color:white;
+}
 .red-font{
   color: #8E4747;
 }
@@ -70,7 +73,7 @@ input[type=text],[type=number]  {
   border-bottom: 2px solid #1B1456;
   width:25%;
   background: transparent;
-  height: 5em;
+  height: 2em;
   outline: none;
 }
 input[type=text].action{
@@ -115,6 +118,9 @@ input[type=text].action{
 .padding-bottom-med{
   padding-bottom:1em ;
 }
+.padding-xl{
+  padding:5em;
+}
 .padding-top-xl{
   padding-top:5em;
 }
@@ -131,15 +137,37 @@ input[type=text].action{
   background-image: url(./assets/check-in.gif);
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 .report-banner{
-  background-image:url(./assets/report-page.gif);
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
 
+  background-image:url(./assets/encounter-stars-1.gif);
+  background-color: #1B1456;
+  height: 100vh;
 }
+.bkg-drkblue{
+  background-color: #1B1456;
+}
+.mobile-center {
+  text-align: center;
+}
+@media only screen and (min-width: 600px) {
+  .report-banner{
+    background-image:url(./assets/report-page.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  }
+  .desktop-drkblue{
+    color:#1B1456;
+  }
+  .bkg-drkblue{
+    background-color: transparent;
+  }
+  .desk-width-50{
+    width:50%;
+  }
+}
+
 .encounter-bkg{
   background-image:url(./assets/encounter-stars-1.gif);
   background-color: #1B1456;
@@ -215,12 +243,13 @@ input[type=submit].report-button {
   padding:2em 5em;
 }
 
-.white{
-  color:white;
-}
+
 .encounter-list{
   background-color: #1b1456;
 }
 .secondary-font{
   font-family: 'Roboto Mono', monospace;
+}
+.height-100{
+  height:100%;
 }

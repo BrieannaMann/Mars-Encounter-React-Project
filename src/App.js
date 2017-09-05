@@ -18,23 +18,16 @@ class App extends Component{
    return (
      <Router>
      <div>
-        <Route exact path='/CheckIn' component={CheckIn} />
-        <Route path='/ReportEncounter' component={ReportEncounter} />
-        <Route path='/GetEncounters' component={GetEncounters} />
-
+       <Switch>
+          <Route exact path='/' component={CheckIn} />
+          <Route path='/ReportEncounter' component={ReportEncounter} />
+          <Route path='/GetEncounters' component={GetEncounters} />
+          <Route component={lost}/>
+       </Switch>
      </div>
      </Router>
-    //  <Switch>
-    //  <div>
-    //     <Route exact path='/CheckIn' component={CheckIn} />
-    //     <Route path='/ReportEncounter' component={ReportEncounter} />
-    //     <Route path='/GetEncounters' component={GetEncounters} />
-     //
-    //  </div>
-    //  </Switch>
+
    );
-
-
 }
 }
 class CheckIn extends Component {
@@ -44,6 +37,7 @@ class CheckIn extends Component {
      name : "",
      age : "",
      jobs : []
+
    };
 
  }
@@ -52,12 +46,16 @@ handleChange(event) {
 }
 
 handleSubmit(event) {
-  event.preventDefault();
-  axios.post("https://red-wdp-api.herokuapp.com/api/mars/colonists", {
-"colonist":
-  {"name":this.state.name,
-  "age": this.state.age,
-  "job_id" : this.state.job}
+  if (this.state.name  == "" || this.state.age =="" || !this.state.job) {
+      alert("Please complete required fields");
+      event.preventDefault();
+  } else {
+alert("hello");
+  axios.post("https://red-wdp-api.herokuapp.com/api/mars/colonists",
+  {"colonist":
+      {"name":this.state.name,
+      "age": this.state.age,
+      "job_id" : this.state.job}
 })
   .then(function(response) {
     console.log(response);
@@ -65,8 +63,7 @@ handleSubmit(event) {
   .catch(function (error) {
     console.log(error);
   });
-
-
+}
 }
 componentDidMount(){
   axios.get("https://red-wdp-api.herokuapp.com/api/mars/jobs")
@@ -81,10 +78,10 @@ componentDidMount(){
 render() {
 return (
 <div className="side-banner">
-  <h1 className="flex width-50 vertical-direction align-center padding-top-xl red-font"> CHECK IN AT BASE CAMP </h1>
-  <form className="padding-lg" onSubmit={this.handleSubmit}>
+  <h1 className="flex desk-width-50 vertical-direction align-center padding-top-xl mobile-center red-font"> CHECK IN AT BASE CAMP </h1>
+  <form className="padding-lg" >
   <h3 className="padding-sm red-font"> NAME</h3>
-    <input type="text" name="name" onChange={ (event) => this.handleChange(event)}  />
+    <input type="text" name="name" value={this.state.name} onChange={(event) => this.handleChange(event)}  />
 
   <h3 className="padding-sm red-font"> AGE </h3>
     <input type="number" name="age" value={this.state.age} onChange={(event) => this.handleChange(event)} />
@@ -99,8 +96,7 @@ return (
 
     <div className="width-50 flex flex-end padding-top-xl">
       <Link to='/GetEncounters'>
-        <input className="padding-sm" type="submit" value="Check in" />
-
+        <input onClick={(event) => this.handleSubmit(event)} className="padding-sm" type="submit" value="Check in" />
       </Link>
       </div>
         </form>
@@ -118,8 +114,6 @@ constructor(props) {
  this.state={
    aliens:[],
    action: ""};
-   this.handleChange = this.handleChange.bind(this);
-   this.handleSubmit = this.handleSubmit.bind(this);
 }
 handleChange(event) {
 this.setState({[event.target.name] : event.target.value});
@@ -157,23 +151,23 @@ render() {
 return (
   <div className="report-banner">
   <div className="flex vertical-direction flex-right banner-edge">
-    <h1 className="flex width-50 flex-center padding-med">REPORT</h1>
-  <form className="border-edge">
+    <h1 className="flex width-50 flex-center padding-med white desktop-drkblue">REPORT</h1>
+  <form className="border-edge bkg-drkblue">
   <div className="flex vertical-direction">
-    <h3 className="padding-sm">ALIEN TYPE</h3>
+    <h3 className="padding-sm white desktop-drkblue">ALIEN TYPE</h3>
     <div className="job-list drk-blue">
-    <select name="alien" value={this.state.alien} onChange={this.handleChange} >
+    <select name="alien" value={this.state.alien} onChange={(event) => this.handleChange(event)} >
     <option value="no" >Select Alien</option>
       {this.state.aliens.map(alien =>
         <option key={alien.id} > {alien.type} </option> )}
     </select>
     </div>
-    <h3 className="padding-top-sm">ACTION TAKEN</h3>
-      <input className="action" type="text" name="action"  value={this.state.action} onChange={this.handleChange} />
+    <h3 className="padding-top-sm white desktop-drkblue">ACTION TAKEN</h3>
+      <input className="action white desktop-drkblue" type="text" name="action"  value={this.state.action} onChange={(event) => this.handleChange(event)} />
     <div className="report flex flex-end  padding-top-xl">
 
     <Link to='/GetEncounters'>
-      <input className="padding-sm" type="submit" value="SUBMIT REPORT"  onClick={this.handleSubmit}/>
+      <input onClick={(event) => this.handleSubmit(event)} className="padding-sm" type="submit" value="SUBMIT REPORT"  />
     </Link>
     </div>
     </div>
@@ -249,13 +243,15 @@ class lost extends Component{
    return (
 
      <div>
-     <h3> LOOKS LIKE YOUR LOST IN </h3>
-     <h1>SPACE </h1>
-     <img className="errormessage" src="assets/404.png" />
-     <Link to='/CheckIn'>
-         <button value=" Report Encounter">
-         </button>
-         </Link>
+     <h3 className="padding-med flex flex-center"> LOOKS LIKE YOU ARE LOST IN </h3>
+     <h1 className="padding-med flex flex-center">SPACE </h1>
+     <div className="flex flex-center">
+     <img className="errormessage flex align-center height-100" src="assets/404.png" />
+     </div>
+     <div className="flex flex-end padding-xl">
+         <Link to='/'>
+             <input className="red report-button"type="submit" value="GO HOME!" /></Link>
+     </div>
      </div>
 
    );
