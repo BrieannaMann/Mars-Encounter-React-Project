@@ -1,3 +1,53 @@
+/*   CSS RESET  */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+/* Don't kill focus outline for keyboard users: http://24ways.org/2009/dont-lose-your-focus */
+a:hover, a:active {
+  outline: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
 h1{
   font-family: 'Space Mono', monospace;
 }
@@ -5,11 +55,11 @@ h3{
   font-family: 'Space Mono', monospace;
   font-size: 25px;
 }
-.mars{
-  height:100%;
-  width:100%;
-  position:absolute;
-  right:0px;
+p{
+  padding:.5em;
+}
+.red-font{
+  color: #8E4747;
 }
 
 .errormessage{
@@ -17,17 +67,38 @@ h3{
 }
 input[type=text],[type=number]  {
   border: none;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid #1B1456;
   width:25%;
+  background: transparent;
+  height: 5em;
+  outline: none;
+}
+input[type=text].action{
+  width:75%;
 }
 .flex{
   display:flex;
   }
+.flex-right{
+  align-items: flex-end;
+  }
+.flex-center{
+  justify-content: center;
+}
+.flex-end{
+  justify-content: end;
+}
 .width-50 {
   width:50%;
 }
+.width-75 {
+  width:75%;
+}
 .vertical-direction {
   flex-direction: column;
+}
+.reverse-column {
+  flex-direction: column-reverse;
 }
 .align-center{
   align-items: center;
@@ -35,6 +106,121 @@ input[type=text],[type=number]  {
 .padding-lg{
   padding:5em;
 }
+.padding-sm{
+  padding:1em 0;
+}
+.padding-med{
+  padding:1em ;
+}
+.padding-bottom-med{
+  padding-bottom:1em ;
+}
+.padding-top-xl{
+  padding-top:5em;
+}
+.padding-top-sm{
+  padding-top: 1em;
+}
+.padding-top-lg{
+  padding-top: 3em;
+}
 .flex-end{
   justify-content: flex-end;
+}
+.side-banner{
+  background-image: url(./assets/check-in.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.report-banner{
+  background-image:url(./assets/report-page.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+
+}
+.encounter-bkg{
+  background-image:url(./assets/encounter-stars-1.gif);
+  background-color: #1B1456;
+
+}
+input[type=submit] {
+    width: 10em;
+    border: none;
+    font-size: 16px;
+    border-radius: 1em;
+    background: #1b1456;
+    color: white;
+}
+input[type=submit].report-button {
+    width: 10em;
+    border:2px solid red;
+    font-size: 16px;
+    border-radius: 1em;
+    background: #1b1456;
+    color: white;
+}
+
+.job-list {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+
+}
+
+.job-list select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+    color: white;
+}
+.job-list {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+
+}
+.job-list.drk-blue select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+}
+.drk-blue{
+     background-color: #1b1456;
+}
+.float-right{
+  float:right;
+}
+.float-left{
+  float:left;
+}
+.report-box{
+  border-width: 1em .1em .1em .1em;
+  border-style: solid;
+  border-color: red;
+  width:75%;
+  background-color: #1B1456;
+}
+
+.border-sm{
+  border: .5em solid white;
+}
+.border-edge{
+  padding:2em 5em;
+}
+
+.white{
+  color:white;
+}
+.encounter-list{
+  background-color: #1b1456;
+}
+.secondary-font{
+  font-family: 'Roboto Mono', monospace;
 }

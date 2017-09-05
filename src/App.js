@@ -6,7 +6,8 @@ import axios from 'axios';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 class App extends Component{
@@ -23,6 +24,14 @@ class App extends Component{
 
      </div>
      </Router>
+    //  <Switch>
+    //  <div>
+    //     <Route exact path='/CheckIn' component={CheckIn} />
+    //     <Route path='/ReportEncounter' component={ReportEncounter} />
+    //     <Route path='/GetEncounters' component={GetEncounters} />
+     //
+    //  </div>
+    //  </Switch>
    );
 
 
@@ -71,26 +80,30 @@ componentDidMount(){
 }
 render() {
 return (
-<div>
-  <img className="mars" src="assets/stars.gif"/>
-  <h1 className="flex width-50 vertical-direction align-center"> CHECK IN AT BASE CAMP </h1>
+<div className="side-banner">
+  <h1 className="flex width-50 vertical-direction align-center padding-top-xl red-font"> CHECK IN AT BASE CAMP </h1>
   <form className="padding-lg" onSubmit={this.handleSubmit}>
-  <h3> NAME </h3>
-    <input type="text" name="name"  onChange={ (event) => this.handleChange(event)} />
-  <h3> AGE </h3>
+  <h3 className="padding-sm red-font"> NAME</h3>
+    <input type="text" name="name" onChange={ (event) => this.handleChange(event)}  />
+
+  <h3 className="padding-sm red-font"> AGE </h3>
     <input type="number" name="age" value={this.state.age} onChange={(event) => this.handleChange(event)} />
-  <h3> OCCUPATION </h3>
+  <h3 className="padding-sm red-font"> OCCUPATION </h3>
+  <div className="job-list drk-blue">
     <select name="job" value={this.state.job} onChange={(event) => this.handleChange(event)} >
       <option value="no" >Select your Occupation</option>
         {this.state.jobs.map(job =>
         <option value={job.id} >{job.name}  </option>)}
     </select>
-    </form>
-    <div className="width-50 flex flex-end">
+    </div>
+
+    <div className="width-50 flex flex-end padding-top-xl">
       <Link to='/GetEncounters'>
-        <input type="submit" value="Check in" />
+        <input className="padding-sm" type="submit" value="Check in" />
+
       </Link>
       </div>
+        </form>
     </div>
 
     );
@@ -142,24 +155,30 @@ componentDidMount(){
 }
 render() {
 return (
-  <div>
-    <h1>REPORT</h1>
-  <form>
-    <h3>ALIEN TYPE</h3>
+  <div className="report-banner">
+  <div className="flex vertical-direction flex-right banner-edge">
+    <h1 className="flex width-50 flex-center padding-med">REPORT</h1>
+  <form className="border-edge">
+  <div className="flex vertical-direction">
+    <h3 className="padding-sm">ALIEN TYPE</h3>
+    <div className="job-list drk-blue">
     <select name="alien" value={this.state.alien} onChange={this.handleChange} >
     <option value="no" >Select Alien</option>
       {this.state.aliens.map(alien =>
         <option key={alien.id} > {alien.type} </option> )}
     </select>
-    <h3>ACTION TAKEN</h3>
-      <input type="text" name="action" placeholder="Action Taken" value={this.state.action} onChange={this.handleChange} />
-    <div className="report">
+    </div>
+    <h3 className="padding-top-sm">ACTION TAKEN</h3>
+      <input className="action" type="text" name="action"  value={this.state.action} onChange={this.handleChange} />
+    <div className="report flex flex-end  padding-top-xl">
 
     <Link to='/GetEncounters'>
-      <input type="submit" value="SUBMIT REPORT"  onClick={this.handleSubmit}/>
+      <input className="padding-sm" type="submit" value="SUBMIT REPORT"  onClick={this.handleSubmit}/>
     </Link>
     </div>
+    </div>
   </form>
+</div>
   </div>
   );
 }}
@@ -184,25 +203,38 @@ class GetEncounters extends Component {
  }
 render() {
 return (
-  <div>
-    <h1> RECENT ALIEN ENCOUNTERS</h1>
-
+  <div className="encounter-bkg">
+    <h1 className="flex flex-center white"> RECENT ALIEN ENCOUNTERS</h1>
+  <h3 className="secondary-font white flex flex-end width-75 padding-top-lg"> Recent Reports </h3>
   <form>
-  <h3>SEEN AN ALIEN</h3>
-    <div className="report-button">
+  <div className="flex border-edge">
+  <div className="width-50">
+  <div className=" report-box ">
+  <h3 className="padding-med flex flex-center white">SEEN AN ALIEN</h3>
+    <div className=" flex flex-center padding-bottom-med">
     <Link to='/ReportEncounter'>
-        <input type="submit" value=" Report Encounter" /></Link>
+        <input className="red report-button"type="submit" value=" REPORT IT NOW!" /></Link>
     </div>
-    <h3>RECENT SIGHTINGS </h3>
+    </div>
+    <h3 className="white padding-top-xl">RECENT SIGHTINGS </h3>
     <div>
     </div>
     <div>
     </div>
     <div>
     </div>
-    <div className="encounter-list">
+    </div>
+
+    <div className="encounter-list flex reverse-column width-50 border-sm white">
       {this.state.encounters.map(encounter =>
-      <p key={encounter.id} >{encounter.date} {encounter.atype}{encounter.action} </p>)}
+      <p key={encounter.id} >
+      <div className="padding-sm">
+      <p className="secondary-font"><strong>Date : </strong> {encounter.date} </p>
+      <p className="secondary-font"><strong>Alien Type :</strong> {encounter.atype} </p>
+      <p className="secondary-font"><strong> Action Taken : </strong>{encounter.action} </p>
+      </div>
+      </p>)}
+    </div>
     </div>
     </form>
     </div>
