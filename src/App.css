@@ -226,12 +226,6 @@ input[type=submit].report-button {
 .drk-blue{
      background-color: #1b1456;
 }
-.float-right{
-  float:right;
-}
-.float-left{
-  float:left;
-}
 .report-box{
   border-width: 1em .1em .1em .1em;
   border-style: solid;
